@@ -11,7 +11,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		19EB3D332ED6ED290003B76D /* Stuttering App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Stuttering App.app"; path = "/Users/sdc-user/Documents/Stuttering-App/build/Debug-iphoneos/Stuttering App.app"; sourceTree = "<absolute>"; };
+		195AD7EF2ED826AF0013EC07 /* Stuttering App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stuttering App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EB3DD42ED71B340003B76D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +52,7 @@
 			children = (
 				19EB3DD42ED71B340003B76D /* .gitignore */,
 				19EB3D352ED6ED290003B76D /* Stuttering App */,
+				195AD7EF2ED826AF0013EC07 /* Stuttering App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,7 +78,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Stuttering App";
-			productReference = 19EB3D332ED6ED290003B76D /* Stuttering App.app */;
+			productReference = 195AD7EF2ED826AF0013EC07 /* Stuttering App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
