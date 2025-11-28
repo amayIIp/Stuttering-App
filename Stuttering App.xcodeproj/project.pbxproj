@@ -16,7 +16,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		19B782632ED86A5B008617E7 /* Exceptions for "Stuttering App" folder in "Stuttering App" target */ = {
+		195AD9DE2ED96A340013EC07 /* Exceptions for "Stuttering App" folder in "Stuttering App" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -29,7 +29,7 @@
 		19EB3D352ED6ED290003B76D /* Stuttering App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				19B782632ED86A5B008617E7 /* Exceptions for "Stuttering App" folder in "Stuttering App" target */,
+				195AD9DE2ED96A340013EC07 /* Exceptions for "Stuttering App" folder in "Stuttering App" target */,
 			);
 			path = "Stuttering App";
 			sourceTree = "<group>";

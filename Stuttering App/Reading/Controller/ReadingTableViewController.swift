@@ -23,7 +23,7 @@ class ReadingTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellTitle = presetTitles[indexPath.row]
+        _ = presetTitles[indexPath.row]
         // First 9 cells (Preset Content)
         if indexPath.row < 9 {
             let cellTitle = presetTitles[indexPath.row]
