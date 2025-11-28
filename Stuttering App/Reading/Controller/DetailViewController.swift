@@ -2,34 +2,30 @@
 //  DetailViewController.swift
 //  Spasht
 //
-//  Created by Prathamesh Patil on 15/11/25.
 //
 
 import UIKit
 
 class DetailViewController: UIViewController {
 
-    // Connect this to the UITextView in your Storyboard
     @IBOutlet weak var textView: UITextView!
     
-    // The TableViewController will set this property before presenting
     var textToDisplay: String = ""
     var titleToDisplay: String = ""
     var exerciseDuration1: String = "N/A"
-    
     private let wordsPerHighlight = 4
     private var highlightDuration: TimeInterval = 1.0
     private let minDuration: TimeInterval = 0.3
     private let maxDuration: TimeInterval = 2.0
     
     // State
-    private(set) var isPlaying = false
+    private(set) var isPlaying = false // set makes such that only this file type can make changes
     private var currentWordBlockIndex = 0
     private var highlightTimer: Timer?
     
     // Processed Data
-    private var wordRanges: [NSRange] = []
-    private var defaultAttributes: [NSAttributedString.Key: Any] = [:]
+    private var wordRanges: [NSRange] = [] // NSRange describes a slice of text
+    private var defaultAttributes: [NSAttributedString.Key: Any] = [:] //text with formatting applied to specific ranges
     private var highlightAttributes: [NSAttributedString.Key: Any] = [:]
     
     // Reference to sheet (for callbacks)
@@ -39,7 +35,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         setupTextView()
-        view.insetsLayoutMarginsFromSafeArea = false
+        //view.insetsLayoutMarginsFromSafeArea = false
         
     }
     
@@ -63,12 +59,12 @@ class DetailViewController: UIViewController {
         
         defaultAttributes = [
             .font: baseFont,
-            .foregroundColor: UIColor.darkGray
+            .foregroundColor: UIColor.gray,
         ]
         
         highlightAttributes = [
             .font: baseFont,
-            .foregroundColor: UIColor.systemBlue,
+            .foregroundColor: UIColor.black,
         ]
         
         let attributedString = NSMutableAttributedString(string: textToDisplay, attributes: defaultAttributes)
@@ -77,7 +73,7 @@ class DetailViewController: UIViewController {
         textView.attributedText = attributedString
         textView.isEditable = false
         textView.textAlignment = .left
-        textView.layoutManager.allowsNonContiguousLayout = true
+        textView.layoutManager.allowsNonContiguousLayout = true //render only the visible parts.
     }
     
     private func calculateWordRanges(for text: String) -> [NSRange] {
@@ -96,8 +92,7 @@ class DetailViewController: UIViewController {
     private func presentWorkoutSheet() {
         guard let sheetVC = storyboard?.instantiateViewController(withIdentifier: "ReadingControlsViewController") as? ReadingControlsViewController else { return }
         
-        // Set the delegate so the sheet can call back to us
-        sheetVC.delegate = self
+        sheetVC.delegate = self// Set the delegate so the sheet can call back to us
         self.sheetVC = sheetVC
         
         sheetVC.isModalInPresentation = true
@@ -116,11 +111,10 @@ class DetailViewController: UIViewController {
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             sheet.largestUndimmedDetentIdentifier = .init("quarter")
             
-            // Force consistent corner radius
-            sheet.preferredCornerRadius = 20 // Adjust this value as needed
+            sheet.preferredCornerRadius = 20 // default value is 10
         }
         
-        // Also set the view's corner radius if needed
+        // setting view ka corner radius
         sheetVC.view.layer.cornerRadius = 20
         sheetVC.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         sheetVC.view.clipsToBounds = true
@@ -131,7 +125,7 @@ class DetailViewController: UIViewController {
     // MARK: - Timer Management
     
     private func startTimer() {
-        highlightTimer?.invalidate()
+        highlightTimer?.invalidate() //kill if any timer is running
         
         highlightTimer = Timer.scheduledTimer(withTimeInterval: highlightDuration, repeats: true) { [weak self] _ in
             guard let self = self else { return }

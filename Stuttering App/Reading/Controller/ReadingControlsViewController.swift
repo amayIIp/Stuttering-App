@@ -24,7 +24,7 @@ class ReadingControlsViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var showResult: UIButton!
     
-    @IBOutlet weak var speedButton: UIButton!
+    @IBOutlet weak var dafButton: UIButton!
         
     // The variable to update
     var currentPlaybackSpeed: Double = 1.0
@@ -44,6 +44,13 @@ class ReadingControlsViewController: UIViewController {
         let playSymbol = UIImage(systemName: "play", withConfiguration: config)
         playPauseButton.setImage(playSymbol, for: .normal)
         playPauseButton.tintColor = .systemBlue
+        
+        playPauseButton.configuration = .glass()
+        decreaseSpeedButton.configuration = .glass()
+        decreaseSpeedButton.setImage(UIImage(systemName: "tortoise"), for: .normal)
+        increaseSpeedButton.configuration = .glass()
+        resetButton.configuration = .glass()
+        showResult.configuration = .glass()
     }
     
     // MARK: - Actions
@@ -126,8 +133,8 @@ class ReadingControlsViewController: UIViewController {
         )
         
         // Attach to Button
-        speedButton.menu = menu
-        speedButton.showsMenuAsPrimaryAction = true
+        dafButton.menu = menu
+        dafButton.showsMenuAsPrimaryAction = true
     }
 
 }

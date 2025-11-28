@@ -11,8 +11,7 @@ class TextInputViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     
-    // 2. This closure will pass the text *back* to the TableViewController
-    var onDoneButtonTapped: ((String) -> Void)?
+    var onDoneButtonTapped: ((String) -> Void)? // This closure will pass the text *back* to the TableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +22,7 @@ class TextInputViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .prominent, target: self, action: #selector(didTapDone))
         
-        // 4. Automatically show the keyboard
-        textView.becomeFirstResponder()
+        textView.becomeFirstResponder() // Automatically show the keyboard
     }
     
     @objc func didTapClose() {
@@ -32,9 +30,8 @@ class TextInputViewController: UIViewController {
     }
     
     @objc func didTapDone() {
-        // Dismiss the modal, and *after* it dismisses...
+        
         self.dismiss(animated: true) {
-            // ...run the closure, passing the text from the text view
             let enteredText = self.textView.text ?? ""
             self.onDoneButtonTapped?(enteredText)
         }
