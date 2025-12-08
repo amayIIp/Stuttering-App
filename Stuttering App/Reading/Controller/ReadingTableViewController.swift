@@ -14,19 +14,14 @@ class ReadingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "bg")
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = presetTitles[indexPath.row]
         // First 9 cells (Preset Content)
         if indexPath.row < 9 {
-            let cellTitle = presetTitles[indexPath.row]
             self.textForDetailView = presetContent[indexPath.row]
             presentModal(withTitle: cellTitle)
             
@@ -35,13 +30,13 @@ class ReadingTableViewController: UITableViewController {
             presentTextInputModal()
         }
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     func presentModal(withTitle title: String) {
             guard let modalNav = storyboard?.instantiateViewController(withIdentifier: "ModalNavigationController") as? UINavigationController,
-                  let modalVC = modalNav.topViewController as? ModalViewController else {
-                return
-            }
+                  let modalVC = modalNav.topViewController as? ModalViewController else {return}
             
             modalVC.modalTitle = title
             
@@ -54,11 +49,11 @@ class ReadingTableViewController: UITableViewController {
                     return 200 // custom height
                 }
                 sheet.detents = [customDetent]
-                sheet.prefersGrabberVisible = false
+                //sheet.prefersGrabberVisible = false
             }
             
-            // *** REMOVE THIS LINE to allow tapping outside to dismiss ***
-            // modalNav.isModalInPresentation = true
+            
+            // modalNav.isModalInPresentation = true // removes tapping outside or sliding down not work
             
             self.present(modalNav, animated: true, completion: nil)
         }
@@ -81,8 +76,15 @@ class ReadingTableViewController: UITableViewController {
             self?.textForDetailView = enteredText
             self?.showDetailScreen()
         }
+        
+       
 
         self.present(modalNav, animated: true, completion: nil)
+       
+           textInputVC.onEmptyInput = { [weak self] in
+               self?.showEmptyInputAlert()
+           }
+
     }
     
 
@@ -96,17 +98,21 @@ class ReadingTableViewController: UITableViewController {
         detailVC.titleToDisplay = self.titleForDetailView
         
         
-        // --- *** UPDATED PRESENTATION LOGIC *** ---
-        
-        // 1. Wrap the DetailVC in its own Navigation Controller
-        //    This is required to show the top bar with the close button
+
         let detailNav = UINavigationController(rootViewController: detailVC)
-        
-        // 2. Set the presentation style to full screen
         detailNav.modalPresentationStyle = .fullScreen
-        
-        // 3. Present it modally
         self.present(detailNav, animated: true, completion: nil)
     }
+    
+    func showEmptyInputAlert() {
+        let alert = UIAlertController(
+            title: "No Text Entered",
+            message: "Please enter some text.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
 
 }
