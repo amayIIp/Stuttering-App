@@ -10,12 +10,13 @@ import Foundation
 struct AchievedChallenge {
     let title: String
     let imageName: String
-    let progress: Float = 1.0   // Always 100%
+     
+    let completedDate: String
 
     static let achieved: [AchievedChallenge] = [
-        AchievedChallenge(title: "First Step", imageName: "firstStep"),
-        AchievedChallenge(title: "Voice Explorer", imageName: "voiceExplorer"),
-        AchievedChallenge(title: "Breath Control", imageName: "breadthControl")
+        AchievedChallenge(title: "First Step", imageName: "firstStep",completedDate: "06/07/25"),
+        AchievedChallenge(title: "Voice Explorer", imageName: "voiceExplorer",completedDate: "06/09/25"),
+        AchievedChallenge(title: "Breath Control", imageName: "breadthControl",completedDate: "06/11/25")
     ]
 }
 
